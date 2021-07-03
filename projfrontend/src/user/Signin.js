@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Base from "../core/Base";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { signin, authenticate, isAuthenticated } from "../auth/helper";
 
 const Signin = () => {
   const [values, setvalues] = useState({
-    email: "",
-    password: "",
+    email: "admin@gmail.com",
+    password: "admin",
     error: "",
     loading: false,
     didRedirect: false,
@@ -36,12 +36,11 @@ const Signin = () => {
   };
 
   const performRedirect = () => {
-    //TODO:do a redirect here
     if (didRedirect) {
       if (user && user.role === 1) {
-        return <p>Redirect to Admin</p>;
+        return <Redirect to="/admin/dashboard" />;
       } else {
-        return <p>Redirect to User</p>;
+        return <Redirect to="/user/dashboard" />;
       }
     }
     if (isAuthenticated()) {
