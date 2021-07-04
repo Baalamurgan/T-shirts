@@ -8,6 +8,9 @@ import AdminRoute from "./auth/helper/AdminRoutes";
 import PrivateRoute from "./auth/helper/PrivateRoutes";
 import UserDashboard from "./user/UserDashBoard";
 import AdminDashboard from "./user/AdminDashBoard";
+import AddCategory from "./admin/AddCategory";
+import ManageCategories from "./admin/ManageCategories";
+import AddProduct from "./admin/AddProduct";
 
 export default function Routes() {
   return (
@@ -19,6 +22,17 @@ export default function Routes() {
         <Route exact path="/signout" component={signout} />
         <PrivateRoute exact path="/user/dashboard" component={UserDashboard} />
         <AdminRoute exact path="/admin/dashboard" component={AdminDashboard} />
+        <AdminRoute
+          exact
+          path="/admin/create/category"
+          component={AddCategory}
+        />
+        <AdminRoute
+          exact
+          path="/admin/categories"
+          component={ManageCategories}
+        />
+        <AdminRoute exact path="/admin/create/product" component={AddProduct} />
       </Switch>
     </BrowserRouter>
   );
