@@ -61,7 +61,7 @@ export function createProduct(req, res) {
 }
 
 export function getProduct(req, res) {
-  req.product.photo = undefined;
+  req.prod.photo = undefined;
   return res.json(req.prod);
 }
 
@@ -100,6 +100,16 @@ export function updateProduct(req, res) {
       });
     }
 
+    const { name, description, price, category, stock } = fields;
+    console.log(fields);
+    if (!name || !description || !price || !category || !stock) {
+      return res.status(400).json({
+        error: "Please include all fields",
+        fields: fields,
+        file: file,
+      });
+    }
+
     //updating in DB
     let product = req.prod;
     product = _.extend(req.prod, fields);
@@ -132,7 +142,7 @@ export function getAllProducts(req, res) {
   let sortBy = req.query.sortBy ? req.query.sortBy : "_id";
   Product.find()
     .select("-photo")
-    .populate("")
+    .populate("category")
     .sort([[sortBy, "asc"]])
     .limit(limit)
     .exec((err, products) => {
@@ -165,12 +175,17 @@ export function updateStock(req, res, next) {
 }
 
 export function getAllUniqueCategories(req, res) {
-  Product.distinct("category", {}, (err, (category) => {
-    if(err){
-      return res.status(400).json({
-        error: "No category found"
-      })
-    }
-    res.json(category);
-  }));
+  Product.distinct(
+    "category",
+    {},
+    (err,
+    (category) => {
+      if (err) {
+        return res.status(400).json({
+          error: "No category found",
+        });
+      }
+      res.json(category);
+    })
+  );
 }
