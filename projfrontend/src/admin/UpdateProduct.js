@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
 import {
-  getCategories,
+  getallCategories,
   getaProduct,
   updateProduct,
 } from "./helper/adminapicall";
@@ -61,7 +61,7 @@ const UpdateProduct = ({ match }) => {
   };
 
   const preloadCategories = () => {
-    getCategories().then((data) => {
+    getallCategories().then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error });
       } else {
@@ -77,7 +77,6 @@ const UpdateProduct = ({ match }) => {
     preLoad(match.params.productId);
   }, []);
 
-  //! TODO:
   const onSubmit = (event) => {
     event.preventDefault();
     setValues({ ...values, error: "", loading: true });
@@ -112,7 +111,7 @@ const UpdateProduct = ({ match }) => {
       className="alert alert-success mt-3"
       style={{ display: createdProduct ? "" : "none" }}
     >
-      <h4>{createdProduct} created successfully</h4>
+      <h4>{createdProduct} updated successfully</h4>
     </div>
   );
 
@@ -203,8 +202,8 @@ const UpdateProduct = ({ match }) => {
 
   return (
     <Base
-      title="Add Products here!"
-      description="Welcome to product creation section"
+      title="Update Products here!"
+      description="Welcome to product updation section"
       className="container bg-info p-4"
     >
       <Link to="/admin/dashboard" className="btn btn-md btn-dark mb-3">

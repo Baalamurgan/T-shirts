@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Base from "../core/Base";
-import { createProduct, getCategories } from "./helper/adminapicall";
+import { createProduct, getallCategories } from "./helper/adminapicall";
 import { isAuthenticated } from "../auth/helper";
 
 const AddProduct = () => {
@@ -37,7 +37,7 @@ const AddProduct = () => {
   } = values;
 
   const preLoad = () => {
-    getCategories().then((data) => {
+    getallCategories().then((data) => {
       //console.log(data);
       if (data.error) {
         setValues({ ...values, error: data.error });
