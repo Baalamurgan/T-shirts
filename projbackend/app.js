@@ -16,6 +16,7 @@ import { userRoutes } from "./routes/user.js";
 import { categoryRoutes } from "./routes/category.js";
 import { productRoutes } from "./routes/product.js";
 import { orderRoutes } from "./routes/order.js";
+import { paymentRoutes } from "./routes/payment.js";
 // const userRoutes=router;
 //import {authRoutes} from "./routes/auth";
 
@@ -41,6 +42,7 @@ app.use("/api", userRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", paymentRoutes);
 
 //PORT
 const port = 8000;
